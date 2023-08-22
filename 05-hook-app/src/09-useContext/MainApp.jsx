@@ -4,6 +4,8 @@ import { LoginPage } from './LoginPage'
 import { AboutPage } from './AboutPage'
 import { Navbar } from './Navbar'
 import { UserProvider } from './context/UserProvider'
+import React from 'react'
+
 
 export const MainApp = () => {
   return (
