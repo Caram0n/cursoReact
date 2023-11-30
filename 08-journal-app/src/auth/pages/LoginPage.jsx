@@ -9,6 +9,12 @@ import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks/useForm'
 import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth'
 
+
+const formData = {
+  email:'',
+  password: ''
+}
+
 export const LoginPage = () => {
 
   const {status, errorMessage} = useSelector(state => state.auth)
@@ -16,10 +22,7 @@ export const LoginPage = () => {
   const dispatch = useDispatch()
   
 
-  const {email, password, onInputChange, formState} = useForm({
-    email:'david@google.com',
-    password: '123456'
-  })
+  const {email, password, onInputChange, formState} = useForm(formData)
 
   const formValidations = {
     email: [(value) => value.includes('@'), 'El correo debe tener un @'],
