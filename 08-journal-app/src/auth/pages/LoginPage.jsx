@@ -29,7 +29,7 @@ export const LoginPage = () => {
     password: [(value) => value.length >= 6, 'El password debe tener más de 6 letras'],
   }
 
-  const isAuthenticated = useMemo(() => status === 'checking', [status])
+  const isAuthenticating = useMemo(() => status === 'checking', [status])
 
   
 
@@ -51,7 +51,10 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title='Login'>
-      <form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__faster'
+      <form 
+        onSubmit={onSubmit} 
+        className='animate__animated animate__fadeIn animate__faster'
+        aria-label='submit-form'
 >
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -73,6 +76,9 @@ export const LoginPage = () => {
               placeholder='Contraseña'
               fullWidth
               name='password'
+              inputProps={
+                {'data-testid': 'password'}
+              }
               value={password}
               onChange={onInputChange}
             />
@@ -89,7 +95,7 @@ export const LoginPage = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Button 
-                disabled={isAuthenticated}
+                disabled={isAuthenticating}
                 type='submit' 
                 variant='contained' 
                 fullWidth
@@ -99,7 +105,12 @@ export const LoginPage = () => {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Button onClick={onGoogleSignIn} variant='contained' fullWidth>
+              <Button
+                disabled={isAuthenticating}
+                onClick={onGoogleSignIn} 
+                aria-label="google-btn"
+                variant='contained' 
+                fullWidth>
                 <Google />
                 <Typography sx={{ ml: 1 }}>Google</Typography>
               </Button>
