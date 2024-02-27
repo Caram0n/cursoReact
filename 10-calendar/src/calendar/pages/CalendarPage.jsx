@@ -12,7 +12,7 @@ export const CalendarPage = () => {
 
   const {openDateModal} = useUiStore()
   const {events, setActiveEvent} = useCalendarStore()
-  const [lastView, setLastView] = useState(localStorage.getItem('lastView' || 'week'))
+  const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
 
   const eventStyleGetter = (event, start, end, isSelected) =>{
 
