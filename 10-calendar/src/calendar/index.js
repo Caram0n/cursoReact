@@ -7,4 +7,4 @@ export * from './components/FabDelete'
 
 
 
-export * from './pages/CalendarPAge'
+export * from './pages/CalendarPage'
