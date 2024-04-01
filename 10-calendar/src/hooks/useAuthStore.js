@@ -37,7 +37,6 @@ export const useAuthStore = () => {
             localStorage.setItem('token', data.token)
             localStorage.setItem('token-init-date', new Date().getTime())
             dispatch(onLogin({name: data.name, uid: data.uid}))
-            console.log({data})
         } catch (error) {
             dispatch(onLogout(error.response.data?.msg))
             setTimeout(() => {

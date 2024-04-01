@@ -1,38 +1,52 @@
-import React from 'react'
+import React from 'react';
+import { useCounter, useFetch } from '../hooks';
+import { LoadingMessage } from './LoadingMessage';
+import { PokemonCard } from './PokemonCard';
 
-import { useCounter, useFetch } from '../hooks'
-import { LoadingQuote, Quote } from './'
 
 export const MultipleCustomHooks = () => {
-    const {counter, increment} = useCounter(1)
 
-    const {data, isLoading, hasError} = useFetch(`https://api.breakingbadquotes.xyz/v1/quotes/${counter}`)
+  const { counter, decrement, increment } = useCounter(1);
+  const { data, hasError, isLoading } = useFetch(`https://pokeapi.co/api/v2/pokemon/${ counter }`);
 
-    
-    const {author, quote} = !!data && data[0]
 
-    
   return (
     <>
-        <h1>BreakingBad Quotes</h1>
-        <hr />
+      <h1>Información de Pokémon</h1>
+      <hr />
+
+      { 
+        isLoading 
+        ? <LoadingMessage /> 
+        : (
+          <PokemonCard 
+            id={ counter } 
+            name={ data.name } 
+            sprites={ [
+              data.sprites.front_default,
+              data.sprites.front_shiny,
+              data.sprites.back_default,
+              data.sprites.back_shiny,
+            ] }
+          />
+        )
+    }
+
+      
 
 
-        {
-            isLoading 
-            ? 
-                <LoadingQuote />
-            :              
-                <Quote author={author} quote={quote} />          
-            
-        
-        }
-
-
-        <button onClick={() => increment()} className='btn btn-primary' disabled={isLoading}>
-            Next quote
-        </button>
-
+      <button
+        className="btn btn-primary mt-2"
+        onClick={ () => counter > 1 ? decrement() : null }
+      >
+        Anterior
+      </button>
+      <button
+        className="btn btn-primary mt-2"
+        onClick={ () => increment() }
+      >
+        Siguiente
+      </button>
 
     </>
   )
